@@ -1,11 +1,15 @@
 import React from "react";
-import "./tailwind.css";
+import "./styles/tailwind.css";
+import UserLayout from "./layouts/UserLayout";
+import ContextProvider from "src/contexts/Provider";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-red-500">Template</h1>
-    </div>
+    <ContextProvider>
+      <UserLayout>
+        <></>
+      </UserLayout>
+    </ContextProvider>
   );
 }
 
