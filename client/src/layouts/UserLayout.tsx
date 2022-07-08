@@ -39,8 +39,9 @@ const UserLayout = (props: Props) => {
 export default UserLayout;
 
 export const Overlay = styled.div.attrs({
-  className: `z-10 fixed w-full h-full bg-neutral-900/50 backdrop-blur-sm`,
+  className: `z-40 fixed w-full h-full bg-neutral-900/50 backdrop-blur-sm`,
 })<OverlayProps>`
+  display: none;
   visible: hidden;
   opacity: 0;
   transition: all 0.3s ease;
@@ -48,6 +49,7 @@ export const Overlay = styled.div.attrs({
   ${(props) =>
     props.isOverlayVisible &&
     css`
+      display: block;
       visible: visible;
       opacity: 1;
     `};

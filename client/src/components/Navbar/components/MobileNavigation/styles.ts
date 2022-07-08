@@ -68,7 +68,7 @@ export const MobileNav = styled.div<MobileNavProps>`
   width: 100%;
   height: 100vh;
   background-color: #fff;
-  transition: transform 0.3s ease-in;
+  transition: transform 0.1s ease-in;
   transform: translateX(-100%);
   top: 4rem;
   z-index: 100;

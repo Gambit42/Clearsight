@@ -17,7 +17,7 @@ export const StyledButton = styled(Button).attrs({
 `;
 
 export const Nav = styled.div.attrs({
-  className: "bg-white fixed w-screen h-16 shadow-sm lg:h-18",
+  className: "bg-white fixed w-screen h-16 shadow-sm lg:h-18 font-montserrat",
 })`
   z-index: 999;
 `;

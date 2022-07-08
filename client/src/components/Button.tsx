@@ -25,6 +25,8 @@ export default Button;
 
 export const StyledButton = styled.button<ButtonProps>`
   padding: 8px 30px;
+  transition: 0.3s ease all;
+  border: transparent 1px solid;
 
   ${({ buttonType }) =>
     buttonType === "primary" &&
@@ -32,6 +34,12 @@ export const StyledButton = styled.button<ButtonProps>`
       color: #fff;
       border-radius: 4px;
       background-color: #b91c1c;
+
+      &:hover {
+        border: #b91c1c 1px solid;
+        background-color: #fff;
+        color: #b91c1c;
+      }
     `}
 
   ${({ buttonType }) => buttonType === "text" && css``}
