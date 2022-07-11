@@ -1,13 +1,17 @@
 import React from "react";
 import UserLayout from "src/layouts/UserLayout";
 import Banner from "./components/Banner";
-import NewArrivals from "./components/NewArrivals";
+import Featured from "./components/Featured";
+import BookCarousel from "src/components/BookCarousel";
 
 const index = () => {
   return (
     <UserLayout>
       <Banner />
-      <NewArrivals />
+      <BookCarousel title="New Arrivals" />
+      <Featured />
+      <BookCarousel title="Fantasy" />
+      <BookCarousel title="Sci-Fi" />
     </UserLayout>
   );
 };
