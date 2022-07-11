@@ -33,8 +33,11 @@ export default function Banner() {
         {slides}
       </S.StyledSwiper>
       <S.SwiperContent>
-        <S.SubText>Everything Science Fiction and Fantasy</S.SubText>
-        <S.MainText>Dragon's Hoard Bookstore</S.MainText>
+        <S.MainText>Welcome to DH Bookstore</S.MainText>
+        <S.SubText>
+          We've got you covered on everything science fiction and fantasy. Come
+          explore your favorite worlds through the pages of a book.
+        </S.SubText>
         <S.StyledButton type="primary" text="Shop Now" />
       </S.SwiperContent>
     </S.BannerContainer>

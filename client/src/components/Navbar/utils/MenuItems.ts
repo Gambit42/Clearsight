@@ -1,25 +1,18 @@
 export const MenuItems = [
   {
-    name: "Popular",
+    name: "Home",
   },
   {
-    name: "Sci-Fi",
-    subList: [
-      { name: "Best Seller" },
-      { name: "Romance" },
-      { name: "Action" },
-      { name: "History" },
-      { name: "YA" },
-    ],
+    name: "Shop",
   },
   {
-    name: "Fantasy",
+    name: "Categories",
     subList: [
-      { name: "Best Seller" },
-      { name: "Romance" },
-      { name: "Action" },
-      { name: "History" },
-      { name: "YA" },
+      { name: "All" },
+      { name: "Best Sellers" },
+      { name: "New Arrivals" },
+      { name: "Fantasy" },
+      { name: "Sci-Fi" },
     ],
   },
 ];
