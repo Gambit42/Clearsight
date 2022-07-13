@@ -17,12 +17,13 @@ export const SwiperContent = styled.div.attrs({
 })``;
 
 export const MainText = styled.div.attrs({
-  className: "text-center text-3xl text-white font-bold pointer-events-none",
+  className:
+    "text-center text-3xl text-white font-semibold pointer-events-none",
 })``;
 
 export const SubText = styled.div.attrs({
   className:
-    "text-center text-white text-xs pt-2 font-semibold lg:text-sm pointer-events-none sm:text-left sm:w-10/12 max-w-[500px]",
+    "font-medium text-center text-gray-50 text-sm pt-2 pointer-events-none sm:text-left sm:w-10/12 max-w-[500px]",
 })``;
 
 export const StyledButton = styled(Button)`

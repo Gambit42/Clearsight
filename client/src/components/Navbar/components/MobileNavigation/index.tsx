@@ -38,7 +38,7 @@ const MobileNavigation = (props: Props) => {
       <S.NavList>{handleDisplayMenuitems}</S.NavList>
       <S.ButtonContainer>
         <S.StyledButton type="primary">Sign in</S.StyledButton>
-        <Button type="secondary">Join now</Button>
+        <Button type="secondary">Register</Button>
       </S.ButtonContainer>
       <S.BottomSpacing />
     </S.MobileNav>

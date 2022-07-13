@@ -75,6 +75,21 @@ export const StyledSwiper = styled(Swiper)`
   position: unset;
   margin: 0 40px 0 40px;
 
+  .swiper-slide {
+    width: 100%;
+
+    @media (min-width: 480px) {
+      width: 50%;
+    }
+
+    @media (min-width: 768px) {
+      width: 33%;
+    }
+
+    @media (min-width: 1024px) {
+      width: 20%;
+    }
+  }
   .swiper-pagination-bullet {
     width: 15px !important;
     height: 15px !important;

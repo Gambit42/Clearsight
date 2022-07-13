@@ -7,6 +7,10 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import * as S from "./styles";
 
+type BannerProps = {
+  backgroundImage: string;
+};
+
 export default function Banner() {
   const bannerImages = [
     "banner_GoT.jpg",

@@ -106,19 +106,19 @@ const BooksCarousel = (props: Props) => {
         <S.StyledButton type="primary">See More</S.StyledButton>
       </S.SectionTitleContainer>
       <S.StyledSwiper
-        breakpoints={{
-          480: {
-            slidesPerView: 2,
-          },
-          768: {
-            slidesPerView: 3,
-          },
-          1024: {
-            slidesPerView: 5,
-          },
-        }}
+        // breakpoints={{
+        //   480: {
+        //     slidesPerView: 2,
+        //   },
+        //   768: {
+        //     slidesPerView: 3,
+        //   },
+        //   1024: {
+        //     slidesPerView: 5,
+        //   },
+        // }}
         loop={true}
-        slidesPerView={1}
+        slidesPerView={"auto"}
         spaceBetween={10}
         pagination={{ clickable: true }}
         navigation={true}

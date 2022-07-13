@@ -86,6 +86,7 @@ export const MobileNav = styled.div<MobileNavProps>`
 
 export const StyledButton = styled(Button)`
   margin-bottom: 10px;
+  padding: 8px 34px;
 `;
 
 export const ButtonContainer = styled.div.attrs({
