@@ -46,7 +46,7 @@ const Navbar = () => {
         <div className="flex flex-row items-center">
           <S.SearchButton onClick={handleSearchOpen} />
           <ShoppingCart cartCount={cartCount} />
-          <S.StyledButton type="primary" text="Sign in" />
+          <S.StyledButton type="primary">Sign In</S.StyledButton>
         </div>
       </S.Container>
       <S.SearchContainer isSearchOpen={isSearchBarOpen}>

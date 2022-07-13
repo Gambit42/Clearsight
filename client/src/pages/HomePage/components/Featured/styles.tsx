@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "src/components/Button";
 import { IoCartOutline } from "react-icons/io5";
 
 export const CartIcon = styled(IoCartOutline).attrs({
@@ -39,12 +40,10 @@ export const ButtonsContainer = styled.div.attrs({
     "flex flex-col pt-6 w-10/12 max-w-[300px] sm:max-w-[400px] sm:flex-row sm:w-full",
 })``;
 
-export const AddToCartButton = styled.button.attrs({
-  className:
-    "rounded text-white border shadow-sm border-gray-200 py-2 px-6 text-sm bg-red-700 hover:bg-white hover:text-gray-900 ease-in duration-100 flex flex-row items-center justify-center sm:mr-4",
+export const AddToCartButton = styled(Button).attrs({
+  className: "flex flex-row mr-2 items-center justify-center",
 })``;
 
-export const ViewMoreDetailsButton = styled.button.attrs({
-  className:
-    "mt-2 rounded border shadow-sm border-gray-200 py-2 px-6 text-sm hover:bg-red-700 hover:text-white bg-white ease-in duration-100 flex flex-row items-center justify-center sm:mt-0",
+export const ViewMoreDetailsButton = styled(Button).attrs({
+  className: "mt-2 flex flex-row items-center justify-center sm:mt-0",
 })``;

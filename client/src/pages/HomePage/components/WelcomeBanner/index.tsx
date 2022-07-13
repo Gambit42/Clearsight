@@ -38,7 +38,7 @@ export default function Banner() {
           We've got you covered on everything science fiction and fantasy. Come
           explore your favorite worlds through the pages of a book.
         </S.SubText>
-        <S.StyledButton type="primary" text="Shop Now" />
+        <S.StyledButton type="primary">Shop Now</S.StyledButton>
       </S.SwiperContent>
     </S.BannerContainer>
   );

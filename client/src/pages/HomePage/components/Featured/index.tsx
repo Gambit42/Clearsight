@@ -24,11 +24,11 @@ const Featured = () => {
           </p>
           <S.BookPrice>₱ 200.00</S.BookPrice>
           <S.ButtonsContainer>
-            <S.AddToCartButton>
+            <S.AddToCartButton type="primary">
               <S.CartIcon />
               <h1>Add to cart</h1>
             </S.AddToCartButton>
-            <S.ViewMoreDetailsButton>
+            <S.ViewMoreDetailsButton type="secondary">
               <h1>View More Details</h1>
             </S.ViewMoreDetailsButton>
           </S.ButtonsContainer>

@@ -22,7 +22,7 @@ const BooksCarousel = (props: Props) => {
       price: 200,
     },
     {
-      title: "Promise of Blood",
+      title: "Promise of Bloodssssssss",
       author: "Brian Mclellan",
       isOnSale: false,
       previousPrice: 400,
@@ -69,22 +69,32 @@ const BooksCarousel = (props: Props) => {
           <S.BookTitleAuthorContainer>
             <S.TitleText>{item.title}</S.TitleText>
             <S.AuthorText>{item.author}</S.AuthorText>
+            <S.BookPricesContainer>
+              <S.BookNewPrice>₱{item.price.toFixed(2)}</S.BookNewPrice>
+              {item.isOnSale ? (
+                <S.BookOldPrice>
+                  ₱{item.previousPrice.toFixed(2)}
+                </S.BookOldPrice>
+              ) : (
+                ""
+              )}
+            </S.BookPricesContainer>
+            {item.isOnSale ? (
+              <h1 className="mt-1 text-center text-xs px-3 py-1 bg-green-500 rounded w-min text-white">
+                SALE
+              </h1>
+            ) : (
+              ""
+            )}
           </S.BookTitleAuthorContainer>
         </S.BookDetails>
-        <S.BookPricesContainer>
-          <S.BookNewPrice>₱ {item.price.toFixed(2)}</S.BookNewPrice>
-          {item.isOnSale ? (
-            <S.BookOldPrice>₱ {item.previousPrice.toFixed(2)}</S.BookOldPrice>
-          ) : (
-            ""
-          )}
-        </S.BookPricesContainer>
-        <S.AddToCartContainer>
-          <S.AddToCartButton>
+
+        {/* <S.AddToCartContainer>
+          <S.AddToCartButton type="secondary">
             <S.CartIcon />
             <h1>Add to cart</h1>
           </S.AddToCartButton>
-        </S.AddToCartContainer>
+        </S.AddToCartContainer> */}
       </S.SliderContent>
     </SwiperSlide>
   ));
@@ -93,7 +103,7 @@ const BooksCarousel = (props: Props) => {
     <S.BookCarouselContainer>
       <S.SectionTitleContainer>
         <S.SectionTitle>{title}</S.SectionTitle>
-        <S.StyledButton type="primary" text="See more" />
+        <S.StyledButton type="primary">See More</S.StyledButton>
       </S.SectionTitleContainer>
       <S.StyledSwiper
         breakpoints={{

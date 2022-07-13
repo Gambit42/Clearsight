@@ -37,8 +37,8 @@ const MobileNavigation = (props: Props) => {
       </S.SearchForm>
       <S.NavList>{handleDisplayMenuitems}</S.NavList>
       <S.ButtonContainer>
-        <S.StyledButton text="Sign in" type="primary" />
-        <Button text="Join now" type="text" />
+        <S.StyledButton type="primary">Sign in</S.StyledButton>
+        <Button type="secondary">Join now</Button>
       </S.ButtonContainer>
       <S.BottomSpacing />
     </S.MobileNav>

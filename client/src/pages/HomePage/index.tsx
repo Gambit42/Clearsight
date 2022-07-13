@@ -1,17 +1,19 @@
 import React from "react";
 import UserLayout from "src/layouts/UserLayout";
-import Banner from "./components/Banner";
+import WelcomeBanner from "./components/WelcomeBanner";
 import Featured from "./components/Featured";
+import BottomBanner from "./components/BottomBanner";
 import BookCarousel from "src/components/BookCarousel";
 
 const index = () => {
   return (
     <UserLayout>
-      <Banner />
+      <WelcomeBanner />
       <BookCarousel title="New Arrivals" />
       <Featured />
       <BookCarousel title="Fantasy" />
       <BookCarousel title="Sci-Fi" />
+      <BottomBanner />
     </UserLayout>
   );
 };
