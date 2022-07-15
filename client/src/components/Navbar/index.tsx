@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import * as S from "./styles";
 import BurgerIcon from "./components/BurgerIcon";
 import ShoppingCart from "./components/ShoppingCart";
@@ -25,11 +26,13 @@ const Navbar = () => {
   };
 
   const handleDisplayMenuitems = MenuItems.map((item) => (
-    <li className="list-none mr-2">
-      <a className="text-lg font-semibold cursor-pointer p-2 hover:text-red-700">
-        {item.name}
-      </a>
-    </li>
+    <Link to={item.path}>
+      <li className="list-none mr-2">
+        <div className="text-lg font-semibold cursor-pointer p-2 hover:text-red-700">
+          {item.name}
+        </div>
+      </li>
+    </Link>
   ));
 
   return (

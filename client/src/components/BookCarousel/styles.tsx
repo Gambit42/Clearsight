@@ -116,5 +116,5 @@ export const SectionTitleContainer = styled.div.attrs({
 })``;
 
 export const SectionTitle = styled.h1.attrs({
-  className: "text-lg font-bold sm:text-2xl",
+  className: "section-title text-lg font-bold sm:text-2xl",
 })``;

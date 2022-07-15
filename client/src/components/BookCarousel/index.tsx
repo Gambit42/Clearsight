@@ -9,10 +9,11 @@ import "swiper/css/navigation";
 type Props = {
   title: string;
   data?: any;
+  otherProps?: unknown;
 };
 
 const BooksCarousel = (props: Props) => {
-  const { title } = props;
+  const { title, ...otherProps } = props;
   const array = [
     {
       title: "Gardens of the Moon",
@@ -100,23 +101,12 @@ const BooksCarousel = (props: Props) => {
   ));
 
   return (
-    <S.BookCarouselContainer>
+    <S.BookCarouselContainer {...otherProps}>
       <S.SectionTitleContainer>
         <S.SectionTitle>{title}</S.SectionTitle>
         <S.StyledButton type="primary">See More</S.StyledButton>
       </S.SectionTitleContainer>
       <S.StyledSwiper
-        // breakpoints={{
-        //   480: {
-        //     slidesPerView: 2,
-        //   },
-        //   768: {
-        //     slidesPerView: 3,
-        //   },
-        //   1024: {
-        //     slidesPerView: 5,
-        //   },
-        // }}
         loop={true}
         slidesPerView={"auto"}
         spaceBetween={10}

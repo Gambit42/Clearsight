@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { IoCartOutline } from "react-icons/io5";
 
 type Props = {
@@ -13,18 +14,22 @@ type CartProps = {
 const ShoppingCart = (props: Props) => {
   const { cartCount } = props;
   return (
-    <StyledAnchorTag>
-      <Cart />
-      <CartCount isEmpty={cartCount === 0 || cartCount === null ? true : false}>
-        <StyledSpan>{cartCount}</StyledSpan>
-      </CartCount>
-    </StyledAnchorTag>
+    <Link to="/cart">
+      <CartContainer>
+        <Cart />
+        <CartCount
+          isEmpty={cartCount === 0 || cartCount === null ? true : false}
+        >
+          <StyledSpan>{cartCount}</StyledSpan>
+        </CartCount>
+      </CartContainer>
+    </Link>
   );
 };
 
 export default ShoppingCart;
 
-export const StyledAnchorTag = styled.a`
+export const CartContainer = styled.div`
   position: relative;
   margin: 0 10px;
 `;
