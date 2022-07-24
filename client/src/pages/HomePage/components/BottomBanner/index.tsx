@@ -9,7 +9,7 @@ const BottomBanner = () => {
         <h1 className="text-white px-2 pb-3 text-lg sm:text-2xl font-bold sm:w-4/5">
           Free shipping nationwide for purchases above P899
         </h1>
-        <Button type="primary">Shop Now</Button>
+        <Button variant="primary">Shop Now</Button>
       </div>
     </S.StyledBanner>
   );

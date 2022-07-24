@@ -14,7 +14,12 @@ type CartProps = {
 const ShoppingCart = (props: Props) => {
   const { cartCount } = props;
   return (
-    <Link to="/cart">
+    <Link
+      to="/cart"
+      onClick={() => {
+        window.scrollTo(0, 0);
+      }}
+    >
       <CartContainer>
         <Cart />
         <CartCount

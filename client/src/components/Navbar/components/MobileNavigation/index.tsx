@@ -6,13 +6,14 @@ import * as S from "./styles";
 
 type Props = {
   isOpen: boolean;
+  onClick: () => void;
 };
 
 const MobileNavigation = (props: Props) => {
-  const { isOpen } = props;
+  const { isOpen, onClick } = props;
 
   const handleDisplayMenuitems = MenuItems.map((item, index) => (
-    <S.MenuItems>
+    <S.MenuItems key={item.name}>
       <S.Checkbox id={`${index}`} type="checkbox" />
       <S.ArrowContainer>
         {item.subList ? <S.SublistArrow /> : ""}
@@ -22,7 +23,7 @@ const MobileNavigation = (props: Props) => {
       </S.CheckBoxLabel>
       <S.SubMenuContainer>
         {item.subList?.map((sublist) => (
-          <S.SubMenuitems>{sublist.name}</S.SubMenuitems>
+          <S.SubMenuitems key={sublist.name}>{sublist.name}</S.SubMenuitems>
         ))}
       </S.SubMenuContainer>
     </S.MenuItems>
@@ -38,8 +39,12 @@ const MobileNavigation = (props: Props) => {
       </S.SearchForm>
       <S.NavList>{handleDisplayMenuitems}</S.NavList>
       <S.ButtonContainer>
-        <S.StyledButton type="primary">Sign in</S.StyledButton>
-        <Button type="secondary">Register</Button>
+        <Link to="/account/signin" onClick={onClick}>
+          <S.StyledButton variant="primary">Sign in</S.StyledButton>
+        </Link>
+        <Link to="/account/signup" onClick={onClick}>
+          <Button variant="secondary">Register</Button>
+        </Link>
       </S.ButtonContainer>
       <S.BottomSpacing />
     </S.MobileNav>

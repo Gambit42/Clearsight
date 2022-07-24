@@ -60,7 +60,7 @@ const BooksCarousel = (props: Props) => {
   ];
 
   const books = array.map((item) => (
-    <SwiperSlide>
+    <SwiperSlide key={item.title}>
       <S.SliderContent>
         <S.BookDetails>
           <S.BookImage
@@ -104,7 +104,7 @@ const BooksCarousel = (props: Props) => {
     <S.BookCarouselContainer {...otherProps}>
       <S.SectionTitleContainer>
         <S.SectionTitle>{title}</S.SectionTitle>
-        <S.StyledButton type="primary">See More</S.StyledButton>
+        <S.StyledButton variant="primary">See More</S.StyledButton>
       </S.SectionTitleContainer>
       <S.StyledSwiper
         loop={true}

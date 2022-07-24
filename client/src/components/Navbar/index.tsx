@@ -26,7 +26,13 @@ const Navbar = () => {
   };
 
   const handleDisplayMenuitems = MenuItems.map((item) => (
-    <Link to={item.path}>
+    <Link
+      to={item.path}
+      key={item.path}
+      onClick={() => {
+        window.scrollTo(0, 0);
+      }}
+    >
       <li className="list-none mr-2">
         <div className="text-lg font-semibold cursor-pointer p-2 hover:text-red-700">
           {item.name}
@@ -49,7 +55,22 @@ const Navbar = () => {
         <div className="flex flex-row items-center">
           <S.SearchButton onClick={handleSearchOpen} />
           <ShoppingCart cartCount={cartCount} />
-          <S.StyledButton type="primary">Sign In</S.StyledButton>
+          <Link
+            to="/account/signin"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
+            <S.StyledButton variant="primary">Sign In</S.StyledButton>
+          </Link>
+          <Link
+            to="/account/signup"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
+            <S.StyledButton variant="secondary">Register</S.StyledButton>
+          </Link>
         </div>
       </S.Container>
       <S.SearchContainer isSearchOpen={isSearchBarOpen}>
@@ -58,7 +79,7 @@ const Navbar = () => {
           <S.SearchBar placeholder="Search" />
         </S.SearchBarAndIconContainer>
       </S.SearchContainer>
-      <MobileNavigation isOpen={isOpen} />
+      <MobileNavigation isOpen={isOpen} onClick={handleMobileNav} />
     </S.Nav>
   );
 };

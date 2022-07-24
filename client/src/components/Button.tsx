@@ -3,19 +3,19 @@ import styled, { css } from "styled-components";
 
 type Props = {
   children: React.ReactNode;
-  type: string;
+  variant: string;
   remainingProps?: unknown;
 };
 
 type ButtonProps = {
-  buttonType: string;
+  buttonVariant: string;
 };
 
 const Button = (props: Props) => {
-  const { type, children, ...remainingProps } = props;
+  const { variant, children, ...remainingProps } = props;
 
   return (
-    <StyledButton {...remainingProps} buttonType={type}>
+    <StyledButton {...remainingProps} buttonVariant={variant}>
       {children}
     </StyledButton>
   );
@@ -29,8 +29,8 @@ export const StyledButton = styled.button<ButtonProps>`
   border: transparent 1px solid;
   border-radius: 4px;
 
-  ${({ buttonType }) =>
-    buttonType === "primary" &&
+  ${({ buttonVariant }) =>
+    buttonVariant === "primary" &&
     css`
       color: #fff;
       background-color: #b91c1c;
@@ -41,20 +41,20 @@ export const StyledButton = styled.button<ButtonProps>`
       }
     `}
 
-  ${({ buttonType }) =>
-    buttonType === "secondary" &&
+  ${({ buttonVariant }) =>
+    buttonVariant === "secondary" &&
     css`
         border: #b91c1c 1px solid;
         background-color: #fff;
         color: #b91c1c;
 
       &:hover {
-        border: #dc2626 1px solid;
-        color: #dc2626;
+        color: #fff;
+      background-color: #b91c1c;
     `}
 
-  ${({ buttonType }) =>
-    buttonType === "cart" &&
+  ${({ buttonVariant }) =>
+    buttonVariant === "cart" &&
     css`
         border: #16a34a 1px solid;
         background-color: #16a34a;
@@ -68,5 +68,5 @@ export const StyledButton = styled.button<ButtonProps>`
 
 
 
-  ${({ buttonType }) => buttonType === "text" && css``}
+  ${({ buttonVariant }) => buttonVariant === "text" && css``}
 `;

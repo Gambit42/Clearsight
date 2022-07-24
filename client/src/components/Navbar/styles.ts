@@ -1,5 +1,7 @@
 import { GiDoubleDragon } from "react-icons/gi";
 import { IoSearchOutline } from "react-icons/io5";
+import { AiOutlineUser } from "react-icons/ai";
+
 import Button from "src/components/Button";
 
 import styled, { css } from "styled-components";
@@ -13,7 +15,7 @@ export const StyledButton = styled(Button).attrs({
 })`
   padding: 8px 14px;
   font-size: 14px;
-  margin: 0 10px;
+  margin: 0 5px;
 `;
 
 export const Nav = styled.div.attrs({
@@ -66,5 +68,9 @@ export const Icon = styled(GiDoubleDragon).attrs({
 })``;
 
 export const SearchButton = styled(IoSearchOutline).attrs({
+  className: "hidden sm:block h-7 w-7 z-10 text-gray-900 cursor-pointer",
+})``;
+
+export const AccountIcon = styled(AiOutlineUser).attrs({
   className: "hidden sm:block h-7 w-7 z-10 text-gray-900 cursor-pointer",
 })``;

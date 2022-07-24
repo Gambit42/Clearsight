@@ -16,7 +16,7 @@ export default function Banner() {
   ];
 
   const slides = bannerImages.map((image) => (
-    <SwiperSlide>
+    <SwiperSlide key={image}>
       <S.StyledBanner backgroundImage={image}></S.StyledBanner>
     </SwiperSlide>
   ));
@@ -36,9 +36,9 @@ export default function Banner() {
         <S.MainText>Welcome to DH Bookstore</S.MainText>
         <S.SubText>
           We've got you covered on everything science fiction and fantasy. Come
-          explore your favorite worlds through the pages of a book.
+          and explore your favorite worlds through the pages of a book.
         </S.SubText>
-        <S.StyledButton type="primary">Shop Now</S.StyledButton>
+        <S.StyledButton variant="primary">Shop Now</S.StyledButton>
       </S.SwiperContent>
     </S.BannerContainer>
   );

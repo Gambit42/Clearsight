@@ -36,7 +36,7 @@ const CartPage = () => {
   const cartIsEmpty = cart && (
     <div className="flex flex-col items-center justify-center py-10 border-y-2 border-gray-200">
       <h1 className="pb-4">Your cart is currently empty.</h1>
-      <Button type="primary">
+      <Button variant="primary">
         <h1>Continue shopping</h1>
       </Button>
     </div>
@@ -55,7 +55,7 @@ const CartPage = () => {
           <p className="pb-5 pt-1 text-sm pr-4 sm:w-10/12">
             *Total is calculated upon checkout.
           </p>
-          <StyledButton type="primary">Proceed to checkout</StyledButton>
+          <StyledButton variant="primary">Proceed to checkout</StyledButton>
         </div>
       </div>
     </div>
