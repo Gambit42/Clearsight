@@ -66,6 +66,20 @@ export const StyledButton = styled.button<ButtonProps>`
         background-color: #fff;
     `}
 
+    ${({ buttonVariant }) =>
+    buttonVariant === "loading" &&
+    css`
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      border: transparent 1px solid;
+      background-color: #e5e7eb;
+      color: #111827;
+    `}
+
+
+
 
 
   ${({ buttonVariant }) => buttonVariant === "text" && css``}
