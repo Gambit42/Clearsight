@@ -78,7 +78,7 @@ exports.loginUser = async (req, res) => {
     });
 
     // signin success
-    res.status(200).json({ message: "Sign in success.", token: refreshToken });
+    res.status(200).json({ message: "Sign in success." });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -100,11 +100,9 @@ exports.userAccess = async (req, res) => {
         return res.status(400).json({ message: "Please sign in again." });
       }
 
-      console.log(user);
-
       //get the user id found on the cookie
       const accessToken = createAccessToken({ id: user.id });
-      return res.status(200).json({ accessToken });
+      return res.status(200).json({ token: accessToken });
     });
   } catch (err) {
     return res.status(500).json({ msg: err.message });
@@ -132,4 +130,24 @@ exports.userForgotPassword = async (req, res) => {
     // console.log(user._id);
     return res.status(200).json({ message: "Please check your email." });
   } catch (error) {}
+};
+
+exports.userInfo = async (req, res) => {
+  try {
+    const user = await userSchema.findById(req.user.id).select("-password");
+    res.status(200).json({ user: user });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.userLogout = async (req, res) => {
+  try {
+    // clear cookie
+    res.clearCookie("rfToken", { path: "/account/access" });
+    // success
+    return res.status(200).json({ message: "Signout success." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };

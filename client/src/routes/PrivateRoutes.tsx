@@ -6,7 +6,7 @@ const PrivateRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<div>You are signed in</div>} />
       </Routes>
     </Router>
   );

@@ -24,6 +24,9 @@ const SignupPage = () => {
     setIsProcessing(true);
 
     if (form.password !== form.confirmPassword) {
+      setTimeout(() => {
+        setIsProcessing(false);
+      }, 1000);
       return console.log("passwords does not match.");
     }
 
@@ -64,33 +67,44 @@ const SignupPage = () => {
         toast.success("Successfully registered !");
       }
     } catch (error) {
-      setIsProcessing(false);
-
-      toast.error("Oops something went wrong. Please try again.");
+      setTimeout(() => {
+        setIsProcessing(false);
+        toast.error("Oops something went wrong. Please try again.");
+      }, 1000);
     }
   };
 
   const handleFormInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputName = event.target.name;
+    const inputValue = event.target.value;
 
     switch (inputName) {
       case "firstName":
-        setForm({ ...form, firstName: event.target.value });
+        setForm({ ...form, firstName: inputValue });
         break;
       case "lastName":
-        setForm({ ...form, lastName: event.target.value });
+        setForm({ ...form, lastName: inputValue });
         break;
       case "email":
-        setForm({ ...form, email: event.target.value });
+        setForm({ ...form, email: inputValue });
         break;
       case "password":
-        setForm({ ...form, password: event.target.value });
+        setForm({ ...form, password: inputValue });
         break;
       case "confirmPassword":
-        setForm({ ...form, confirmPassword: event.target.value });
+        setForm({ ...form, confirmPassword: inputValue });
         break;
     }
   };
+
+  const displayButton = isProcessing ? (
+    <StyledButton variant="loading" type="button">
+      <ClipLoader size={25} />
+      <p className="ml-2">Creating an account</p>
+    </StyledButton>
+  ) : (
+    <StyledButton variant="primary">Create an account</StyledButton>
+  );
 
   return (
     <UserLayout>
@@ -156,19 +170,7 @@ const SignupPage = () => {
                 onChange={handleFormInput}
               />
             </div>
-            {isProcessing ? (
-              <StyledButton variant="loading">
-                <ClipLoader size={25} />
-                <p className="ml-2">Creating an account</p>
-              </StyledButton>
-            ) : (
-              <StyledButton variant="primary">Create an account</StyledButton>
-            )}
-            {/* <StyledButton variant="primary">Create an account</StyledButton>
-            <Button variant="loading">
-              <ClipLoader size={25} />
-              <p className="ml-4">Creating an account</p>
-            </Button> */}
+            {displayButton}
           </form>
           <div className="mt-10 flex flex-col items-center">
             <h1 className="font-medium mb-2">Already have an account?</h1>

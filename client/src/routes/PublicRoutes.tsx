@@ -5,7 +5,8 @@ import CartPage from "src/pages/CartPage";
 import SigninPage from "src/pages/SigninPage";
 import SignupPage from "src/pages/SignupPage";
 
-const PublicRoutes = () => {
+type Props = {};
+const PublicRoutes = (props: Props) => {
   return (
     <Router>
       <Routes>

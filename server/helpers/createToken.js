@@ -8,7 +8,7 @@ exports.createRefreshToken = (id) => {
 
 exports.createAccessToken = (id) => {
   return jwt.sign(id, process.env.ACCESS_JWT_SECRET, {
-    expiresIn: "24H",
+    expiresIn: "120s",
   });
 };
 

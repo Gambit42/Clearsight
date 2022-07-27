@@ -5,6 +5,7 @@ type Props = {
   children: React.ReactNode;
   variant: string;
   remainingProps?: unknown;
+  type?: "button" | "submit" | "reset" | undefined;
 };
 
 type ButtonProps = {
@@ -12,10 +13,10 @@ type ButtonProps = {
 };
 
 const Button = (props: Props) => {
-  const { variant, children, ...remainingProps } = props;
+  const { variant, type, children, ...remainingProps } = props;
 
   return (
-    <StyledButton {...remainingProps} buttonVariant={variant}>
+    <StyledButton type={type} {...remainingProps} buttonVariant={variant}>
       {children}
     </StyledButton>
   );

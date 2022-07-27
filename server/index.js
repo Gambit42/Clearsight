@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectDatabase = require("./utils/connectDatabase");
 const dotenv = require("dotenv");
@@ -13,6 +14,15 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cookieParser());
+
+//Fix cors issues
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT"],
+    credentials: true, // enable set cookie
+  })
+);
 
 //Connect to database
 connectDatabase();

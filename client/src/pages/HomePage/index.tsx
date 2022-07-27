@@ -5,7 +5,8 @@ import Featured from "./components/Featured";
 import BottomBanner from "./components/BottomBanner";
 import BookCarousel from "src/components/BookCarousel";
 
-const index = () => {
+type Props = {};
+const index = (props: Props) => {
   return (
     <UserLayout>
       <WelcomeBanner />

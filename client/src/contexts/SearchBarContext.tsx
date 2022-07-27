@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 type SearchBarProps = {
   isSearchBarOpen?: boolean;
-  setIsSearchBarOpen?: (isOverlay: boolean) => void;
+  setIsSearchBarOpen?: (isSearchBarOpen: boolean) => void;
 };
 
 const SearchBarContext = createContext<SearchBarProps | null>(null);
