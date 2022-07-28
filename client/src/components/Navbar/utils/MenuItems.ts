@@ -5,11 +5,11 @@ export const MenuItems = [
   },
   {
     name: "Shop",
-    path: "/shop",
+    path: "/account/signin",
   },
   {
     name: "Categories",
-    path: "",
+    path: "/account/signup",
     subList: [
       { name: "All" },
       { name: "Best Sellers" },

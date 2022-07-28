@@ -72,5 +72,5 @@ export const SearchButton = styled(IoSearchOutline).attrs({
 })``;
 
 export const AccountIcon = styled(AiOutlineUser).attrs({
-  className: "hidden sm:block h-7 w-7 z-10 text-gray-900 cursor-pointer",
+  className: "hidden sm:block h-7 w-7 z-10 text-gray-900 cursor-pointer mr-8",
 })``;

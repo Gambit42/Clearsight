@@ -6,6 +6,7 @@ import BottomBanner from "./components/BottomBanner";
 import BookCarousel from "src/components/BookCarousel";
 
 type Props = {};
+
 const index = (props: Props) => {
   return (
     <UserLayout>

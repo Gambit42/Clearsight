@@ -61,7 +61,14 @@ const Navbar = () => {
 
   const displayUserOptions =
     user?.length !== 0 ? (
-      <h1>hi logged in</h1>
+      <Link
+        to="/account/profile"
+        onClick={() => {
+          window.scrollTo(0, 0);
+        }}
+      >
+        <S.AccountIcon />
+      </Link>
     ) : (
       <>
         <Link

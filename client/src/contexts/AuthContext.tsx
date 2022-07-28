@@ -12,20 +12,27 @@ export const AuthContext = createContext<AuthContextProps | null>(null);
 
 export const authReducer = (state: any, action: any) => {
   switch (action.type) {
+    case "LOADING":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "STOP_LOADING":
+      return {
+        ...state,
+        isLoading: false,
+      };
     case "LOGIN":
       return {
         ...state,
         isLoggedIn: true,
+        isLoading: false,
+        user: action.payload,
       };
     case "GET_TOKEN":
       return {
         ...state,
         token: action.payload,
-      };
-    case "GET_USER":
-      return {
-        ...state,
-        user: action.payload,
       };
     case "LOGOUT":
       return {

@@ -1,22 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "src/pages/HomePage";
-import CartPage from "src/pages/CartPage";
-import SigninPage from "src/pages/SigninPage";
-import SignupPage from "src/pages/SignupPage";
+import { Navigate, Outlet } from "react-router-dom";
 
-type Props = {};
+type Props = {
+  isLoggedIn: boolean | undefined;
+};
+
 const PublicRoutes = (props: Props) => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/account/signin" element={<SigninPage />} />
-        <Route path="/account/signup" element={<SignupPage />} />
-      </Routes>
-    </Router>
-  );
+  const { isLoggedIn } = props;
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
+  }
+
+  return <Outlet />;
 };
 
 export default PublicRoutes;

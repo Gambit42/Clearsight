@@ -13,7 +13,7 @@ const ContextProvider = (props: Props) => {
     user: localStorage.getItem("_user") || [],
     isLoggedIn: false,
     token: "",
-    isLoading: false,
+    isLoading: true,
   };
   const { children } = props;
   const [state, dispatch] = useReducer(authReducer, initialValues);

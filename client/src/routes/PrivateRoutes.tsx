@@ -1,15 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "src/pages/HomePage";
+import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateRoutes = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<div>You are signed in</div>} />
-      </Routes>
-    </Router>
-  );
+type Props = {
+  isLoggedIn: boolean | undefined;
+};
+
+const PrivateRoutes = (props: Props) => {
+  const { isLoggedIn } = props;
+
+  if (!isLoggedIn) {
+    return <Navigate to="account/signin" />;
+  }
+
+  return <Outlet />;
 };
 
 export default PrivateRoutes;
