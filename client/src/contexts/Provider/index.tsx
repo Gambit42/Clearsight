@@ -10,7 +10,7 @@ type Props = {
 
 const ContextProvider = (props: Props) => {
   const initialValues = {
-    user: [],
+    user: localStorage.getItem("_user") || [],
     isLoggedIn: false,
     token: "",
     isLoading: false,

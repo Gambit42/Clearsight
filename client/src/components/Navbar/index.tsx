@@ -16,7 +16,7 @@ const Navbar = () => {
     useContext(SearchBarContext) || {};
   const { isMobileNavOpen, setIsMobileNavOpen } =
     useContext(MobileNavContext) || {};
-  const { user, dispatch, isLoading } = useContext(AuthContext) || {};
+  const { user, dispatch } = useContext(AuthContext) || {};
   const cartCount = 4;
 
   const handleMobileNav = () => {
@@ -28,8 +28,6 @@ const Navbar = () => {
     setIsSearchBarOpen?.(!isSearchBarOpen);
   };
 
-  console.log(user);
-
   const handleLogout = async () => {
     const config = {
       withCredentials: true,
@@ -38,6 +36,7 @@ const Navbar = () => {
       await axios.post("http://localhost:4000/account/logout", null, config);
       dispatch({ type: "LOGOUT" });
       localStorage.setItem("isSignedIn", "");
+      localStorage.setItem("_user", "");
       console.log("Sign_out");
     } catch (error) {
       console.log(error);

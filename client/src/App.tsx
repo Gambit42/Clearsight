@@ -32,6 +32,7 @@ function App() {
         withCredentials: true,
       });
       dispatch({ type: "GET_USER", payload: res.data });
+      localStorage.setItem("_user", JSON.stringify(res.data));
     } catch (error) {}
   };
 
@@ -46,7 +47,7 @@ function App() {
     if (token) {
       handleGetUser();
     }
-  }, [dispatch, token]);
+  }, [token]);
 
   return (
     <>
