@@ -126,9 +126,16 @@ const SigninPage = (props: Props) => {
             </div>
             <div className="flex flex-col items-center">
               {displayButton}
-              <p className="inline-block text-center mt-2 text-blue-500 cursor-pointer">
-                Forgot Password
-              </p>
+              <Link
+                to="/account/forgot-password"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <p className="inline-block text-center mt-2 text-blue-500 cursor-pointer">
+                  Forgot Password
+                </p>
+              </Link>
             </div>
           </form>
           <div className="mt-10 flex flex-col items-center">

@@ -57,14 +57,46 @@ export const StyledButton = styled.button<ButtonProps>`
   ${({ buttonVariant }) =>
     buttonVariant === "cart" &&
     css`
-        border: #16a34a 1px solid;
-        background-color: #16a34a;
-        color: #fff;
+      border: #16a34a 1px solid;
+      color: #16a34a;
+      background-color: #fff;
 
       &:hover {
-        border: #16a34a 1px solid;
-        color: #16a34a;
-        background-color: #fff;
+        background-color: #16a34a;
+        color: #fff;
+      }
+
+      /* border: #111 1px solid;
+      background-color: #fff;
+      color: #111;
+
+      &:hover {
+        color: #fff;
+        background-color: #111;
+      } */
+    `}
+
+
+      ${({ buttonVariant }) =>
+    buttonVariant === "secondaryCart" &&
+    css`
+      border: #16a34a 1px solid;
+      background-color: #16a34a;
+      color: #fff;
+
+      &:hover {
+        border: #22c55e 1px solid;
+        background-color: #22c55e;
+      }
+
+      /* border: #111 1px solid;
+      background-color: #fff;
+      color: #111;
+
+      &:hover {
+        color: #fff;
+        background-color: #111;
+      } */
     `}
 
     ${({ buttonVariant }) =>

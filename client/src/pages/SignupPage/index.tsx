@@ -24,10 +24,10 @@ const SignupPage = () => {
     setIsProcessing(true);
 
     if (form.password !== form.confirmPassword) {
-      setTimeout(() => {
+      return setTimeout(() => {
         setIsProcessing(false);
+        toast.error("Passwords does not match.");
       }, 1000);
-      return console.log("passwords does not match.");
     }
 
     //Allows cookie to be sent
@@ -69,7 +69,7 @@ const SignupPage = () => {
     } catch (error) {
       setTimeout(() => {
         setIsProcessing(false);
-        toast.error("Oops something went wrong. Please try again.");
+        toast.error(error.response.data.message);
       }, 1000);
     }
   };
