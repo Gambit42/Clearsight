@@ -64,12 +64,22 @@ const SignupPage = () => {
           password: "",
           confirmPassword: "",
         });
-        toast.success("Successfully registered !");
+        toast.success("Successfully registered !", {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: true,
+          autoClose: 4000,
+          toastId: "success",
+        });
       }
     } catch (error) {
       setTimeout(() => {
         setIsProcessing(false);
-        toast.error(error.response.data.message);
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: true,
+          autoClose: 4000,
+          toastId: "error",
+        });
       }, 1000);
     }
   };

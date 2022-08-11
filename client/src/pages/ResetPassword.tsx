@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import UserLayout from "src/layouts/UserLayout";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import ClipLoader from "react-spinners/ClipLoader";
 import Button from "src/components/Button";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const { token } = useParams();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -18,15 +20,13 @@ const ForgotPassword = () => {
 
     const config = {
       method: "POST",
-      header: {
-        "Content-Type": "application/json",
-      },
+      headers: { Authorization: token as string },
     };
 
     try {
       const data = await axios.post(
-        "http://localhost:4000/account/forgot-password",
-        { email: email },
+        "http://localhost:4000/account/reset-password",
+        { password: password },
         config
       );
 
@@ -55,59 +55,63 @@ const ForgotPassword = () => {
 
   const handleFormInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
+    const inputName = event.target.name;
 
-    setEmail(inputValue);
+    if (inputName === "password") {
+      setPassword(inputValue);
+    } else if (inputName === "confirmPassword") {
+      setConfirmPassword(inputValue);
+    }
   };
 
   const displayButton = isProcessing ? (
     <StyledButton variant="loading" type="button">
       <ClipLoader size={25} />
-      <p className="ml-2">Sending Email</p>
+      <p className="ml-2">Resetting password</p>
     </StyledButton>
   ) : (
-    <StyledButton variant="primary">Send Email</StyledButton>
+    <StyledButton variant="primary">Reset Password</StyledButton>
   );
   return (
     <UserLayout>
       <div className="max-w-6xl mx-auto">
         <div className="min-h-screen flex w-screen max-w-sm flex-col justify-center px-4 font-montserrat my-10">
           <div>
-            <h1 className="mb-2 text-3xl font-bold">Forgot password</h1>
-            <p>Please type your email to continue.</p>
+            <h1 className="mb-2 text-3xl font-bold">Reset Password</h1>
+            <p>Please type your new password to continue.</p>
           </div>
           <form className="flex flex-col w-full mt-10" onSubmit={handleSubmit}>
-            <div className="rounded flex flex-row border w-full items-center px-4 py-2 mt-4">
-              <AiOutlineMail className="mr-2" />
+            <div className="rounded flex flex-row border w-full items-center px-4 py-2">
+              <AiOutlineLock className="mr-2" />
               <input
-                name="email"
-                type="email"
-                placeholder="Email"
+                name="password"
+                type="password"
+                placeholder="Password"
                 className="bg-transparent outline-none w-full"
                 onChange={handleFormInput}
-                value={email}
+                value={password}
+              />
+            </div>
+            <div className="rounded flex flex-row border w-full items-center px-4 py-2 mt-4">
+              <AiOutlineLock className="mr-2" />
+              <input
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+                className="bg-transparent outline-none w-full"
+                onChange={handleFormInput}
+                value={confirmPassword}
               />
             </div>
             {displayButton}
-            <p className="text-xs p-2">*Please make sure to check your spam.</p>
           </form>
-          <div className="mt-10 flex flex-col items-center">
-            <h1 className="font-medium mb-2">Remember your account?</h1>
-            <Link
-              to="/account/signin"
-              onClick={() => {
-                window.scrollTo(0, 0);
-              }}
-            >
-              <Button variant="secondary">Login</Button>
-            </Link>
-          </div>
         </div>
       </div>
     </UserLayout>
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;
 
 export const StyledButton = styled(Button).attrs({
   className: "mt-10 w-full",

@@ -5,6 +5,7 @@ const {
   createRefreshToken,
   createAccessToken,
 } = require("../helpers/createToken");
+const bcrypt = require("bcrypt");
 
 exports.registerUser = async (req, res) => {
   try {
@@ -30,7 +31,7 @@ exports.registerUser = async (req, res) => {
     if (password.length < 6) {
       return res
         .status(400)
-        .json({ message: "Password must be atleast 6 characters." });
+        .json({ message: "Password must be at least 6 characters." });
     }
 
     const newUser = await userSchema.create({
@@ -47,7 +48,7 @@ exports.registerUser = async (req, res) => {
       data: newUser,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "error" });
   }
 };
 
@@ -124,11 +125,11 @@ exports.userForgotPassword = async (req, res) => {
     const accessToken = createAccessToken({ id: user.id });
 
     //send email
-    const url = `http://localhost:3000/account/forgot-password/${accessToken}`;
+    const url = `http://localhost:3000/account/reset-password/${accessToken}`;
     sendResetPasswordEmail(email, url);
-    // console.log(user.id);
-    // console.log(user._id);
-    return res.status(200).json({ message: "Please check your email." });
+    return res.status(200).json({
+      message: "Email sent successfully",
+    });
   } catch (error) {}
 };
 
@@ -136,6 +137,29 @@ exports.userInfo = async (req, res) => {
   try {
     const user = await userSchema.findById(req.user.id).select("-password");
     res.status(200).json({ user: user });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.userResetPassword = async (req, res) => {
+  try {
+    //get password
+    const { password } = req.body;
+
+    //hash password
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    //Update password. req.user.id is from the middleware auth
+    await userSchema.findOneAndUpdate(
+      { id: req.user.id },
+      { password: hashedPassword }
+    );
+
+    //reset success
+    res.status(200).json({ message: "Successfully changed password." });
+    req;
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

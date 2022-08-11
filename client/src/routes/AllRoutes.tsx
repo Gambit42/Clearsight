@@ -8,6 +8,7 @@ import SigninPage from "src/pages/SigninPage";
 import AccountPage from "src/pages/AccountPage";
 import SignupPage from "src/pages/SignupPage";
 import ForgotPassword from "src/pages/ForgotPassword";
+import ResetPassword from "src/pages/ResetPassword";
 
 type Props = {
   isLoggedIn: boolean | undefined;
@@ -25,6 +26,10 @@ const AllRoutes = (props: Props) => {
           <Route path="/account/signin" element={<SigninPage />} />
           <Route path="/account/signup" element={<SignupPage />} />
           <Route path="/account/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="/account/reset-password/:token"
+            element={<ResetPassword />}
+          />
         </Route>
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />

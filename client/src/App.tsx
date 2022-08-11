@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <AllRoutes isLoggedIn={isLoggedIn} />
-      <ToastContainer />
+      <ToastContainer limit={1} />
     </>
   );
 }
