@@ -51,10 +51,25 @@ const Navbar = () => {
         window.scrollTo(0, 0);
       }}
     >
-      <li className="list-none mr-2">
-        <div className="text-lg font-semibold cursor-pointer p-2 hover:text-red-700">
+      <li className="list-none mr-2 relative">
+        <div className="peer text-lg font-semibold cursor-pointer p-2 hover:text-red-700">
           {item.name}
         </div>
+        {item.subList && (
+          <div className="opacity-0 peer-hover:opacity-100 hover:opacity-100 transition-all absolute bg-white p-4 min-w-[150px]">
+            {item.subList?.map((list) => (
+              <Link
+                to={list.path}
+                key={list.path}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <h1 className="pt-2 hover:text-red-700">{list.name}</h1>
+              </Link>
+            ))}
+          </div>
+        )}
       </li>
     </Link>
   ));

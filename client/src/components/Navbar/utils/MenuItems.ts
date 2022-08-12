@@ -5,17 +5,17 @@ export const MenuItems = [
   },
   {
     name: "Shop",
-    path: "/account/signin",
+    path: "/shop/all",
   },
   {
     name: "Categories",
-    path: "/account/signup",
+    path: "",
     subList: [
-      { name: "All" },
-      { name: "Best Sellers" },
-      { name: "New Arrivals" },
-      { name: "Fantasy" },
-      { name: "Sci-Fi" },
+      { name: "All", path: "/shop/all" },
+      { name: "Best Sellers", path: "/shop/best-sellers" },
+      { name: "New Arrivals", path: "/shop/new-arrivals" },
+      { name: "Fantasy", path: "/shop/fantasy" },
+      { name: "Sci-Fi", path: "/shop/scifi" },
     ],
   },
 ];

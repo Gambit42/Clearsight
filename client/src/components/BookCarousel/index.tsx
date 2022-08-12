@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./styles";
 import { SwiperSlide } from "swiper/react";
+import useFindByGenre from "src/hooks/useFindByGenre";
 import { Pagination, Navigation } from "swiper";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -10,10 +13,15 @@ type Props = {
   title: string;
   data?: any;
   otherProps?: unknown;
+  genre: any;
 };
 
 const BooksCarousel = (props: Props) => {
-  const { title, ...otherProps } = props;
+  const { title, genre, ...otherProps } = props;
+  const [loading, setLoading] = useState(true);
+  const { products, isLoading } = useFindByGenre({ genre });
+  const [items, setItems] = useState<any[]>([]);
+
   const array = [
     {
       title: "Gardens of the Moon",
@@ -69,7 +77,31 @@ const BooksCarousel = (props: Props) => {
     },
   ];
 
-  const books = array.map((item) => (
+  // const handleFindByGenre = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const res = await axios.post("http://localhost:4000/product/genre", {
+  //       genre: genre,
+  //     });
+
+  //     setItems(res.data.data);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   handleFindByGenre();
+  // }, []);
+
+  console.log(items);
+
+  // if (isLoading) {
+  //   return <h1>Loading..</h1>;
+  // }
+
+  const books = products.map((item) => (
     <SwiperSlide key={item.title}>
       <S.SliderContent>
         <S.BookDetails>
@@ -81,7 +113,7 @@ const BooksCarousel = (props: Props) => {
               <S.BookNewPrice>₱{item.price.toFixed(2)}</S.BookNewPrice>
               {item.isOnSale ? (
                 <S.BookOldPrice>
-                  ₱{item.previousPrice.toFixed(2)}
+                  ₱{item.previousPrice?.toFixed(2)}
                 </S.BookOldPrice>
               ) : (
                 ""
@@ -100,23 +132,60 @@ const BooksCarousel = (props: Props) => {
     </SwiperSlide>
   ));
 
+  const Swiper = isLoading ? (
+    <S.StyledSwiper
+      loop={true}
+      slidesPerView={"auto"}
+      spaceBetween={10}
+      pagination={{ clickable: true }}
+      navigation={true}
+      modules={[Pagination, Navigation]}
+      className="mySwiper"
+      breakpoints={{
+        640: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+        992: {
+          slidesPerView: 5,
+        },
+      }}
+    >
+      {Array(6)
+        .fill(null)
+        .map((item, index) => (
+          <SwiperSlide key={index}>
+            <div>
+              <Skeleton className="w-full min-h-[220px]" />
+              <Skeleton className="mt-5 w-full" height={20} />
+              <Skeleton className="mt-2 w-full" height={20} />
+            </div>
+          </SwiperSlide>
+        ))}
+    </S.StyledSwiper>
+  ) : (
+    <S.StyledSwiper
+      loop={true}
+      slidesPerView={"auto"}
+      spaceBetween={10}
+      pagination={{ clickable: true }}
+      navigation={true}
+      modules={[Pagination, Navigation]}
+      className="mySwiper"
+    >
+      {books}
+    </S.StyledSwiper>
+  );
+
   return (
     <S.BookCarouselContainer {...otherProps}>
       <S.SectionTitleContainer>
         <S.SectionTitle>{title}</S.SectionTitle>
         <S.StyledButton variant="primary">See More</S.StyledButton>
       </S.SectionTitleContainer>
-      <S.StyledSwiper
-        loop={true}
-        slidesPerView={"auto"}
-        spaceBetween={0}
-        pagination={{ clickable: true }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
-        {books}
-      </S.StyledSwiper>
+      {Swiper}
     </S.BookCarouselContainer>
   );
 };

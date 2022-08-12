@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserLayout from "src/layouts/UserLayout";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { AiOutlineLock } from "react-icons/ai";
 import ClipLoader from "react-spinners/ClipLoader";
 import Button from "src/components/Button";
 import styled from "styled-components";
@@ -13,6 +13,7 @@ const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { token } = useParams();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -38,6 +39,7 @@ const ResetPassword = () => {
           autoClose: 4000,
           toastId: "succcess",
         });
+        navigate("/account/signin");
       }
     } catch (error) {
       console.log(error);

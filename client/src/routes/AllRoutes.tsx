@@ -9,6 +9,7 @@ import AccountPage from "src/pages/AccountPage";
 import SignupPage from "src/pages/SignupPage";
 import ForgotPassword from "src/pages/ForgotPassword";
 import ResetPassword from "src/pages/ResetPassword";
+import ShopPage from "src/pages/ShopPage";
 
 type Props = {
   isLoggedIn: boolean | undefined;
@@ -33,6 +34,7 @@ const AllRoutes = (props: Props) => {
         </Route>
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/shop/:category" element={<ShopPage />} />
       </Routes>
     </Router>
   );
