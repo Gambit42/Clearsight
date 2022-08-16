@@ -39,7 +39,7 @@ export const BookOldPrice = styled.div.attrs({
 })``;
 export const SliderContent = styled.div.attrs({
   className:
-    "min-h-[385px] flex flex-col justify-between border border-gray-50 w-full items-center",
+    "min-h-[385px] flex flex-col justify-between border border-gray-100 w-full items-center",
 })``;
 
 export const StyledButton = styled(Button).attrs({ className: "text-sm" })`

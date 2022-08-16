@@ -11,10 +11,11 @@ const index = (props: Props) => {
   return (
     <UserLayout>
       <WelcomeBanner />
-      <BookCarousel title="New Arrivals" genre="Sci-fi" />
+      <BookCarousel title="New Arrivals" category="new-arrivals" />
+      <BookCarousel title="Best Sellers" category="best-sellers" />
       <Featured />
-      <BookCarousel title="Fantasy" genre="Fantasy" />
-      <BookCarousel title="Sci-Fi" genre="Sci-fi" />
+      <BookCarousel title="Fantasy" category="fantasy" />
+      <BookCarousel title="Sci-Fi" category="sci-fi" />
       <BottomBanner />
     </UserLayout>
   );

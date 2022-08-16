@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import BurgerIcon from "./components/BurgerIcon";
 import ShoppingCart from "./components/ShoppingCart";
@@ -11,6 +11,7 @@ import { MenuItems } from "./utils/MenuItems";
 import axios from "axios";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isSearchBarOpen, setIsSearchBarOpen } =
     useContext(SearchBarContext) || {};
@@ -47,7 +48,10 @@ const Navbar = () => {
     <Link
       to={item.path}
       key={item.path}
-      onClick={() => {
+      onClick={(event: any) => {
+        if (item.name === "Genres") {
+          return event.preventDefault();
+        }
         window.scrollTo(0, 0);
       }}
     >
@@ -56,17 +60,18 @@ const Navbar = () => {
           {item.name}
         </div>
         {item.subList && (
-          <div className="opacity-0 peer-hover:opacity-100 hover:opacity-100 transition-all absolute bg-white p-4 min-w-[150px]">
+          <div className="hidden peer-hover:flex hover:flex flex-col transition-all absolute bg-white p-4 min-w-[150px]">
             {item.subList?.map((list) => (
-              <Link
-                to={list.path}
+              <h1
                 key={list.path}
+                className="pt-2 hover:text-red-700"
                 onClick={() => {
                   window.scrollTo(0, 0);
+                  navigate(`${list.path}`);
                 }}
               >
-                <h1 className="pt-2 hover:text-red-700">{list.name}</h1>
-              </Link>
+                {list.name}
+              </h1>
             ))}
           </div>
         )}

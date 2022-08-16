@@ -10,11 +10,11 @@ const productSchema = new mongoose.Schema(
     imageURL: {
       type: String,
     },
-    popularity: { type: Number },
     genre: [{ type: String }],
     price: { type: Number },
     previousPrice: { type: Number },
     isOnSale: { type: Boolean },
+    numberOfSales: { type: Number },
   },
   { timestamps: true }
 );

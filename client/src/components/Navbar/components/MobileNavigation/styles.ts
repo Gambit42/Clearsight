@@ -18,7 +18,7 @@ export const ArrowContainer = styled.div.attrs({
 
 export const CheckBoxLabel = styled.label.attrs({
   className:
-    "px-4 py-2 h-14 w-full flex flex-row justify-between items-center cursor-pointer",
+    " px-4 py-2 h-14 w-full flex flex-row justify-between items-center cursor-pointer",
 })``;
 
 export const Checkbox = styled.input.attrs({

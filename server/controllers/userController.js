@@ -147,6 +147,14 @@ exports.userResetPassword = async (req, res) => {
     //get password
     const { password } = req.body;
 
+    //Check password length
+
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters." });
+    }
+
     //hash password
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -159,7 +167,6 @@ exports.userResetPassword = async (req, res) => {
 
     //reset success
     res.status(200).json({ message: "Successfully changed password." });
-    req;
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
