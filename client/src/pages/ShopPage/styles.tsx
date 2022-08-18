@@ -1,19 +1,14 @@
 import styled, { css } from "styled-components";
 import Button from "src/components/Button";
 import { IoCartOutline } from "react-icons/io5";
-import { Swiper } from "swiper/react";
-
-const arrowStyles = css`
-  color: #111;
-  font-size: 25px;
-`;
 
 export const BookDetails = styled.div.attrs({
-  className: "cursor-pointer flex flex-col p-2 group justify-center",
+  className:
+    "cursor-pointer flex flex-col items-center p-2 group justify-center border-gray-50",
 })``;
 
 export const BookTitleAuthorContainer = styled.div.attrs({
-  className: "w-full text-left max-h-[300px] min-h-[80px] max-w-[160px]",
+  className: "w-full text-left max-h-[300px] min-h-[120px] max-w-[160px]",
 })``;
 
 export const AuthorText = styled.h1.attrs({
@@ -22,7 +17,7 @@ export const AuthorText = styled.h1.attrs({
 
 export const BookImage = styled.img.attrs({
   className:
-    "w-full h-full rounded h-[200px] max-w-[160px] cursor-pointer scale-100 group-hover:scale-105 ease-in duration-100 py-2",
+    "w-full h-full rounded h-[200px] max-w-[120px] cursor-pointer scale-100 group-hover:scale-105 ease-in duration-100 py-2",
 })``;
 
 export const BookPricesContainer = styled.div.attrs({
@@ -39,7 +34,7 @@ export const BookOldPrice = styled.div.attrs({
 })``;
 export const SliderContent = styled.div.attrs({
   className:
-    "min-h-[385px] flex flex-col justify-between border border-gray-100 w-full items-center",
+    "min-h-[300px] border border-gray-100 flex flex-col justify-between border border-gray-50 w-full items-center",
 })``;
 
 export const StyledButton = styled(Button).attrs({ className: "text-sm" })`
@@ -56,11 +51,12 @@ export const AddToCartButton = styled(Button).attrs({
 `;
 
 export const AddToCartContainer = styled.div.attrs({
-  className: "pb-4 max-w-[160px] w-full",
+  className: "px-1 pb-4 max-w-[160px] w-full",
 })``;
 
 export const TitleText = styled.h1.attrs({
-  className: "text-sm w-[160px] group-hover:text-red-900",
+  className:
+    "text-sm xss:max-w-[110px] xs:max-w-[160px] group-hover:text-red-900",
 })`
   /* display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -73,56 +69,4 @@ export const TitleText = styled.h1.attrs({
 export const SaleText = styled.h1.attrs({
   className:
     "mt-1 text-center text-xs px-3 py-1 bg-green-500 rounded w-min text-white",
-})``;
-
-export const StyledSwiper = styled(Swiper)`
-  position: unset;
-  margin: 0 40px 0 40px;
-
-  .swiper-slide {
-    width: 100%;
-
-    @media (min-width: 480px) {
-      width: 50%;
-    }
-
-    @media (min-width: 768px) {
-      width: 33%;
-    }
-
-    @media (min-width: 1024px) {
-      width: 25%;
-    }
-
-    @media (min-width: 1100px) {
-      width: 20%;
-    }
-  }
-  .swiper-pagination-bullet {
-    width: 15px !important;
-    height: 15px !important;
-    background-color: #111 !important;
-  }
-  .swiper-pagination {
-    margin-bottom: 10px;
-  }
-  .swiper-button-prev:after {
-    ${arrowStyles}
-  }
-  .swiper-button-next:after {
-    ${arrowStyles}
-  }
-`;
-
-export const BookCarouselContainer = styled.div.attrs({
-  className:
-    "mx-auto max-w-6xl w-screen px-4 sm:w-11/12 font-montserrat pb-20 pt-10 relative",
-})``;
-
-export const SectionTitleContainer = styled.div.attrs({
-  className: "flex flex-row justify-between items-center pt-10 pb-5 ",
-})``;
-
-export const SectionTitle = styled.h1.attrs({
-  className: "section-title text-lg font-bold sm:text-2xl",
 })``;

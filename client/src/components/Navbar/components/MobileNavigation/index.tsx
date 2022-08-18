@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MenuItems } from "../../utils/MenuItems";
 import { Button } from "src/components";
 import * as S from "./styles";
@@ -11,9 +11,18 @@ type Props = {
 
 const MobileNavigation = (props: Props) => {
   const { isOpen, onClick } = props;
+  const navigate = useNavigate();
 
   const handleDisplayMenuitems = MenuItems.map((item, index) => (
-    <S.MenuItems key={item.name}>
+    <S.MenuItems
+      key={item.name}
+      onClick={() => {
+        if (item.name !== "Genres") {
+          navigate(item.path);
+          onClick();
+        }
+      }}
+    >
       <S.Checkbox id={`${index}`} type="checkbox" />
       <S.ArrowContainer>
         {item.subList ? <S.SublistArrow /> : ""}

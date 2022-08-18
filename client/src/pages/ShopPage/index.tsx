@@ -4,23 +4,22 @@ import { Link, useParams } from "react-router-dom";
 import useFindByGenre from "src/hooks/useFindByGenre";
 import { IoIosArrowDown } from "react-icons/io";
 import * as S from "./styles";
+import Pagination from "./Pagination";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const ShopPage = () => {
+  const limit = 12;
   const [title, setTitle] = useState("");
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-  const [isFilterByOpen, setIsFilterByOpen] = useState(false);
+  const [isSorterOpen, setIsSorterOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("");
-  const [activeFilter, setActiveFilter] = useState("");
+  const [activeSorter, setActiveSorter] = useState("None");
   const { category } = useParams();
-  const { products, isLoading } = useFindByGenre({
+  const { count, products, isLoading } = useFindByGenre({
     genre: category,
-    limit: 12,
+    limit: limit,
   });
-
-  console.log(category);
-  console.log(products);
 
   useEffect(() => {
     switch (category) {
@@ -33,8 +32,8 @@ const ShopPage = () => {
         setActiveCategory("Fantasy");
         break;
       case "sci-fi":
-        setTitle("Science Fiction");
-        setActiveCategory("Science Fiction");
+        setTitle("Sci-Fi");
+        setActiveCategory("Sci-Fi");
         break;
       default:
         setTitle("All");
@@ -57,10 +56,11 @@ const ShopPage = () => {
     { name: "Price: Low to high", query: "?orderBy=price&orderWay=asc" },
     { name: "Name: A to Z", query: "?orderBy=name&orderWay=asc" },
     { name: "Name: Z to A", query: "?orderBy=name&orderWay=desc" },
+    { name: "None", query: "" },
   ];
 
   const books = isLoading ? (
-    <div className="grid grid-cols-1 xss:grid-cols-2 md:grid-cols-4 gap-5 pt-10 pb-32">
+    <div className="grid grid-cols-1 xss:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 py-10">
       {Array(12)
         .fill(null)
         .map((item, index) => (
@@ -72,41 +72,49 @@ const ShopPage = () => {
         ))}
     </div>
   ) : (
-    <div className="grid grid-cols-1 xss:grid-cols-2 md:grid-cols-4 gap-5 pt-10 pb-32">
-      {products.map((item) => (
-        <S.SliderContent key={item.title}>
-          <S.BookDetails>
-            <S.BookImage src={item.image} alt="malaz" />
-            <S.BookTitleAuthorContainer>
-              <S.TitleText>{item.title}</S.TitleText>
-              <S.AuthorText>{item.author}</S.AuthorText>
-              <S.BookPricesContainer>
-                <S.BookNewPrice>₱{item.price.toFixed(2)}</S.BookNewPrice>
-                {item.isOnSale ? (
-                  <S.BookOldPrice>
-                    ₱{item.previousPrice?.toFixed(2)}
-                  </S.BookOldPrice>
-                ) : (
-                  ""
-                )}
-              </S.BookPricesContainer>
-              {item.isOnSale ? <S.SaleText>SALE</S.SaleText> : ""}
-            </S.BookTitleAuthorContainer>
-          </S.BookDetails>
-          <S.AddToCartContainer>
-            <S.AddToCartButton variant="cart">
-              <S.CartIcon />
-              <h1>Add to cart</h1>
-            </S.AddToCartButton>
-          </S.AddToCartContainer>
-        </S.SliderContent>
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-1 xss:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 py-10">
+        {products.map((item) => (
+          <S.SliderContent key={item.title}>
+            <S.BookDetails>
+              <S.BookImage src={item.image} alt="malaz" />
+              <S.BookTitleAuthorContainer>
+                <S.TitleText>{item.title}</S.TitleText>
+                <S.AuthorText>{item.author}</S.AuthorText>
+                <S.BookPricesContainer>
+                  <S.BookNewPrice>₱{item.price.toFixed(2)}</S.BookNewPrice>
+                  {item.isOnSale ? (
+                    <S.BookOldPrice>
+                      ₱{item.previousPrice?.toFixed(2)}
+                    </S.BookOldPrice>
+                  ) : (
+                    ""
+                  )}
+                </S.BookPricesContainer>
+                {item.isOnSale ? <S.SaleText>SALE</S.SaleText> : ""}
+              </S.BookTitleAuthorContainer>
+            </S.BookDetails>
+            <S.AddToCartContainer>
+              <S.AddToCartButton variant="cart">
+                <S.CartIcon />
+                <h1>Add to cart</h1>
+              </S.AddToCartButton>
+            </S.AddToCartContainer>
+          </S.SliderContent>
+        ))}
+      </div>
+    </>
   );
 
   return (
     <UserLayout>
-      <div className="min-h-screen px-4 mt-16 w-screen max-w-6xl mx-auto flex flex-col justify-start font-montserrat">
+      <div
+        className="min-h-screen px-4 mt-16 w-screen max-w-6xl mx-auto flex flex-col justify-start font-montserrat"
+        onClick={() => {
+          setIsCategoriesOpen(false);
+          setIsSorterOpen(false);
+        }}
+      >
         <div className="pt-10">
           <h1 className="text-lg font-bold sm:text-2xl">{`${title} Books`}</h1>
         </div>
@@ -116,7 +124,8 @@ const ShopPage = () => {
             <div className="flex flex-col items-center justify-center border border-gray-100 py-2 px-6 relative">
               <div
                 className="flex flex-row items-center cursor-pointer"
-                onClick={() => {
+                onClick={(event: any) => {
+                  event.stopPropagation();
                   setIsCategoriesOpen(!isCategoriesOpen);
                 }}
               >
@@ -150,19 +159,20 @@ const ShopPage = () => {
             <div className="flex flex-col items-center justify-center border border-gray-100 py-2 px-6 relative">
               <div
                 className="flex flex-row items-center z-10 cursor-pointer"
-                onClick={() => {
-                  setIsFilterByOpen(!isFilterByOpen);
+                onClick={(event: any) => {
+                  event.stopPropagation();
+                  setIsSorterOpen(!isSorterOpen);
                 }}
               >
-                <h1 className="">All</h1>
+                <h1 className="">{activeSorter}</h1>
                 <IoIosArrowDown className="w-6 h-6 ml-2" />
               </div>
               <div
                 className={`${
-                  isFilterByOpen ? "opacity-100 z-50" : " opacity-0"
+                  isSorterOpen ? "opacity-100 z-50" : " opacity-0"
                 } left-0 mt-12 top-0  flex flex-col absolute px-5 py-4 transition-all duration-200 border border-gray-100 drop-shadow-sm min-w-[200px] bg-white`}
                 onClick={() => {
-                  setIsFilterByOpen(false);
+                  setIsSorterOpen(false);
                 }}
               >
                 {filters.map((item) => (
@@ -175,7 +185,14 @@ const ShopPage = () => {
                       setIsCategoriesOpen(false);
                     }}
                   >
-                    <h1 className="py-1">{item.name}</h1>
+                    <h1
+                      className="py-1"
+                      onClick={() => {
+                        setActiveSorter(item.name);
+                      }}
+                    >
+                      {item.name}
+                    </h1>
                   </Link>
                 ))}
               </div>
@@ -183,6 +200,12 @@ const ShopPage = () => {
           </div>
         </div>
         {books}
+        <Pagination
+          count={count}
+          limit={limit}
+          genre={activeCategory}
+          sorter={activeSorter}
+        />
       </div>
     </UserLayout>
   );

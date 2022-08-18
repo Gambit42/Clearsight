@@ -13,7 +13,7 @@ export const MenuItems = [
     subList: [
       { name: "All", path: "/shop/all" },
       { name: "Fantasy", path: "/shop/fantasy" },
-      { name: "Sci-Fi", path: "/shop/scifi" },
+      { name: "Sci-Fi", path: "/shop/sci-fi" },
     ],
   },
 ];

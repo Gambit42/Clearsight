@@ -24,8 +24,6 @@ const BooksCarousel = (props: Props) => {
     limit: carouselLimit,
   });
 
-  console.log(category);
-
   const books = products.map((item) => (
     <SwiperSlide key={item.title}>
       <S.SliderContent>

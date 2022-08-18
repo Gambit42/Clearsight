@@ -68,6 +68,7 @@ const Navbar = () => {
                 onClick={() => {
                   window.scrollTo(0, 0);
                   navigate(`${list.path}`);
+                  console.log(list.path);
                 }}
               >
                 {list.name}
