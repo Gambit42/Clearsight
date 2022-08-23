@@ -3,11 +3,11 @@ import * as S from "./styles";
 import { SwiperSlide } from "swiper/react";
 import useFindByGenre from "src/hooks/useFindByGenre";
 import { Pagination, Navigation } from "swiper";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import Book from "src/components/Book";
+import BookSkeleton from "src/components/BookSkeleton";
 
 type Props = {
   title: string;
@@ -26,32 +26,7 @@ const BooksCarousel = (props: Props) => {
 
   const books = products.map((item) => (
     <SwiperSlide key={item.title}>
-      <S.SliderContent>
-        <S.BookDetails>
-          <S.BookImage src={item.image} alt="malaz" />
-          <S.BookTitleAuthorContainer>
-            <S.TitleText>{item.title}</S.TitleText>
-            <S.AuthorText>{item.author}</S.AuthorText>
-            <S.BookPricesContainer>
-              <S.BookNewPrice>₱{item.price.toFixed(2)}</S.BookNewPrice>
-              {item.isOnSale ? (
-                <S.BookOldPrice>
-                  ₱{item.previousPrice?.toFixed(2)}
-                </S.BookOldPrice>
-              ) : (
-                ""
-              )}
-            </S.BookPricesContainer>
-            {item.isOnSale ? <S.SaleText>SALE</S.SaleText> : ""}
-          </S.BookTitleAuthorContainer>
-        </S.BookDetails>
-        <S.AddToCartContainer>
-          <S.AddToCartButton variant="cart">
-            <S.CartIcon />
-            <h1>Add to cart</h1>
-          </S.AddToCartButton>
-        </S.AddToCartContainer>
-      </S.SliderContent>
+      <Book item={item} />
     </SwiperSlide>
   ));
 
@@ -81,9 +56,7 @@ const BooksCarousel = (props: Props) => {
         .map((item, index) => (
           <SwiperSlide key={index}>
             <div>
-              <Skeleton className="w-full min-h-[220px]" />
-              <Skeleton className="mt-5 w-full" height={20} />
-              <Skeleton className="mt-2 w-full" height={20} />
+              <BookSkeleton />
             </div>
           </SwiperSlide>
         ))}

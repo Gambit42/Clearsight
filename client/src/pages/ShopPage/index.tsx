@@ -5,8 +5,8 @@ import useFindByGenre from "src/hooks/useFindByGenre";
 import { IoIosArrowDown } from "react-icons/io";
 import * as S from "./styles";
 import Pagination from "./Pagination";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+import Book from "src/components/Book";
+import BookSkeleton from "src/components/BookSkeleton";
 
 const ShopPage = () => {
   const limit = 12;
@@ -50,13 +50,10 @@ const ShopPage = () => {
 
   const filters = [
     { name: "Best sellers", query: "?orderBy=rating&orderWay=desc" },
-    { name: "Old to new", query: "?orderBy=date&orderWay=asc" },
-    { name: "New to old", query: "?orderBy=date&orderWay=desc" },
-    { name: "Price: High to low", query: "?orderBy=price&orderWay=desc" },
-    { name: "Price: Low to high", query: "?orderBy=price&orderWay=asc" },
-    { name: "Name: A to Z", query: "?orderBy=name&orderWay=asc" },
-    { name: "Name: Z to A", query: "?orderBy=name&orderWay=desc" },
-    { name: "None", query: "" },
+    { name: "New", query: "?orderBy=date&orderWay=desc" },
+    { name: "Price (High to low)", query: "?orderBy=price&orderWay=desc" },
+    { name: "Price (Low to high)", query: "?orderBy=price&orderWay=asc" },
+    { name: "Default", query: "" },
   ];
 
   const books = isLoading ? (
@@ -65,9 +62,7 @@ const ShopPage = () => {
         .fill(null)
         .map((item, index) => (
           <div key={index}>
-            <Skeleton className="w-full min-h-[220px]" />
-            <Skeleton className="mt-5 w-full" height={20} />
-            <Skeleton className="mt-2 w-full" height={20} />
+            <BookSkeleton />
           </div>
         ))}
     </div>
@@ -75,32 +70,7 @@ const ShopPage = () => {
     <>
       <div className="grid grid-cols-1 xss:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 py-10">
         {products.map((item) => (
-          <S.SliderContent key={item.title}>
-            <S.BookDetails>
-              <S.BookImage src={item.image} alt="malaz" />
-              <S.BookTitleAuthorContainer>
-                <S.TitleText>{item.title}</S.TitleText>
-                <S.AuthorText>{item.author}</S.AuthorText>
-                <S.BookPricesContainer>
-                  <S.BookNewPrice>₱{item.price.toFixed(2)}</S.BookNewPrice>
-                  {item.isOnSale ? (
-                    <S.BookOldPrice>
-                      ₱{item.previousPrice?.toFixed(2)}
-                    </S.BookOldPrice>
-                  ) : (
-                    ""
-                  )}
-                </S.BookPricesContainer>
-                {item.isOnSale ? <S.SaleText>SALE</S.SaleText> : ""}
-              </S.BookTitleAuthorContainer>
-            </S.BookDetails>
-            <S.AddToCartContainer>
-              <S.AddToCartButton variant="cart">
-                <S.CartIcon />
-                <h1>Add to cart</h1>
-              </S.AddToCartButton>
-            </S.AddToCartContainer>
-          </S.SliderContent>
+          <Book item={item} />
         ))}
       </div>
     </>
