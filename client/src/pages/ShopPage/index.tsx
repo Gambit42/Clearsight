@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UserLayout from "src/layouts/UserLayout";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import useGetProducts from "src/hooks/useGetProducts";
 import { IoIosArrowDown } from "react-icons/io";
 import * as S from "./styles";
@@ -9,6 +9,7 @@ import Book from "src/components/Book";
 import BookSkeleton from "src/components/BookSkeleton";
 
 const ShopPage = () => {
+  const location = useLocation();
   const limit = 12;
   const [title, setTitle] = useState("");
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
@@ -113,7 +114,10 @@ const ShopPage = () => {
                 {categories.map((item) => (
                   <Link
                     key={item.path}
-                    to={item.path}
+                    to={{
+                      pathname: item.path,
+                      search: location.search,
+                    }}
                     onClick={() => {
                       setIsCategoriesOpen(false);
                     }}
