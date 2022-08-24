@@ -6,6 +6,7 @@ type Props = {
   variant: string;
   remainingProps?: unknown;
   type?: "button" | "submit" | "reset" | undefined;
+  onClick?: () => void;
 };
 
 type ButtonProps = {
@@ -13,10 +14,15 @@ type ButtonProps = {
 };
 
 const Button = (props: Props) => {
-  const { variant, type, children, ...remainingProps } = props;
+  const { variant, type, children, onClick, ...remainingProps } = props;
 
   return (
-    <StyledButton type={type} {...remainingProps} buttonVariant={variant}>
+    <StyledButton
+      type={type}
+      {...remainingProps}
+      buttonVariant={variant}
+      onClick={onClick}
+    >
       {children}
     </StyledButton>
   );
@@ -65,15 +71,6 @@ export const StyledButton = styled.button<ButtonProps>`
         background-color: #16a34a;
         color: #fff;
       }
-
-      /* border: #111 1px solid;
-      background-color: #fff;
-      color: #111;
-
-      &:hover {
-        color: #fff;
-        background-color: #111;
-      } */
     `}
 
 
@@ -88,15 +85,6 @@ export const StyledButton = styled.button<ButtonProps>`
         border: #22c55e 1px solid;
         background-color: #22c55e;
       }
-
-      /* border: #111 1px solid;
-      background-color: #fff;
-      color: #111;
-
-      &:hover {
-        color: #fff;
-        background-color: #111;
-      } */
     `}
 
     ${({ buttonVariant }) =>

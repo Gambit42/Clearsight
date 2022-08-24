@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserLayout from "src/layouts/UserLayout";
 import { Link, useParams } from "react-router-dom";
-import useFindByGenre from "src/hooks/useFindByGenre";
+import useGetProducts from "src/hooks/useGetProducts";
 import { IoIosArrowDown } from "react-icons/io";
 import * as S from "./styles";
 import Pagination from "./Pagination";
@@ -16,7 +16,7 @@ const ShopPage = () => {
   const [activeCategory, setActiveCategory] = useState("");
   const [activeSorter, setActiveSorter] = useState("None");
   const { category } = useParams();
-  const { count, products, isLoading } = useFindByGenre({
+  const { count, products, isLoading } = useGetProducts({
     genre: category,
     limit: limit,
   });
@@ -49,8 +49,8 @@ const ShopPage = () => {
   ];
 
   const filters = [
-    { name: "Best sellers", query: "?orderBy=rating&orderWay=desc" },
-    { name: "New", query: "?orderBy=date&orderWay=desc" },
+    { name: "Best sellers", query: "?orderBy=numberOfSales&orderWay=desc" },
+    { name: "New", query: "?orderBy=createdAt&orderWay=desc" },
     { name: "Price (High to low)", query: "?orderBy=price&orderWay=desc" },
     { name: "Price (Low to high)", query: "?orderBy=price&orderWay=asc" },
     { name: "Default", query: "" },
@@ -70,7 +70,7 @@ const ShopPage = () => {
     <>
       <div className="grid grid-cols-1 xss:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 py-10">
         {products.map((item) => (
-          <Book item={item} />
+          <Book key={item.title} item={item} />
         ))}
       </div>
     </>

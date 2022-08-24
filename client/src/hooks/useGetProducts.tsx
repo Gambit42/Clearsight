@@ -8,7 +8,7 @@ type Props = {
   limit: number;
 };
 
-const useFindByGenre = (props: Props) => {
+const useGetProducts = (props: Props) => {
   const location = useLocation();
   const [products, setProducts] = useState<any[]>([]);
   const [count, setCount] = useState(0);
@@ -17,11 +17,14 @@ const useFindByGenre = (props: Props) => {
 
   const handleFindByGenre = async () => {
     setLoading(true);
+    const { page, orderWay, orderBy } = qs.parse(location.search);
     try {
-      const res = await axios.post("http://localhost:4000/product/genre", {
+      const res = await axios.post("http://localhost:4000/product/get", {
         category: genre,
         limit,
-        page: Number(qs.parse(location.search).page),
+        page: Number(page),
+        orderWay: orderWay === "asc" ? 1 : -1,
+        orderBy,
       });
 
       setProducts(res.data.data);
@@ -43,4 +46,4 @@ const useFindByGenre = (props: Props) => {
   };
 };
 
-export default useFindByGenre;
+export default useGetProducts;

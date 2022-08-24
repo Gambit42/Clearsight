@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as S from "./styles";
 import { SwiperSlide } from "swiper/react";
-import useFindByGenre from "src/hooks/useFindByGenre";
+import useGetProducts from "src/hooks/useGetProducts";
 import { Pagination, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -19,7 +19,7 @@ type Props = {
 const BooksCarousel = (props: Props) => {
   const carouselLimit = 6;
   const { title, category, ...otherProps } = props;
-  const { products, isLoading } = useFindByGenre({
+  const { products, isLoading } = useGetProducts({
     genre: category,
     limit: carouselLimit,
   });

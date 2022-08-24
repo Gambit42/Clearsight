@@ -37,25 +37,10 @@ exports.addProduct = async (req, res) => {
   }
 };
 
-exports.findAllProducts = async (req, res) => {
-  try {
-    const products = await productSchema.find();
-
-    res.status(200).json({
-      success: true,
-      data: products,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
-  }
-};
-
-exports.findProductsByCategory = async (req, res) => {
-  const { category, limit, page } = req.body;
+exports.getProducts = async (req, res) => {
+  const { category, limit, page, orderBy, orderWay } = req.body;
   let skip = 0;
+
   if (page) {
     skip = limit * (page - 1);
   }
@@ -63,7 +48,11 @@ exports.findProductsByCategory = async (req, res) => {
   //Find all products
   if (category === "all") {
     try {
-      const products = await productSchema.find().limit(limit).skip(skip);
+      const products = await productSchema
+        .find()
+        .limit(limit)
+        .skip(skip)
+        .sort({ [orderBy]: orderWay });
       const productCount = await productSchema.countDocuments();
 
       res.status(200).json({
@@ -123,7 +112,8 @@ exports.findProductsByCategory = async (req, res) => {
       const products = await productSchema
         .find({ genre: category })
         .limit(limit)
-        .skip(skip);
+        .skip(skip)
+        .sort({ [orderBy]: orderWay });
 
       const productCount = await productSchema.countDocuments({
         genre: category,

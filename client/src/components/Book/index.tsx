@@ -6,6 +6,10 @@ type Props = {
 };
 const Book = (props: Props) => {
   const { item } = props;
+
+  const handleAddToCart = () => {
+    console.log("adding to cart");
+  };
   return (
     <S.Container key={item.title}>
       <S.BookDetails>
@@ -25,7 +29,7 @@ const Book = (props: Props) => {
         </S.InnerDetailsContainer>
       </S.BookDetails>
       <S.AddToCartContainer>
-        <S.AddToCartButton variant="cart">
+        <S.AddToCartButton variant="cart" onClick={handleAddToCart}>
           <S.CartIcon />
           <h1>Add to cart</h1>
         </S.AddToCartButton>

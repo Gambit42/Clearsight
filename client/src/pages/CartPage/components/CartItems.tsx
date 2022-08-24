@@ -1,33 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-const CartItems = () => {
-  const array = [
-    // {
-    //   title: "Harry Potter and the Chamber of Secrets",
-    //   author: "J.K. Rowling",
-    //   isOnSale: false,
-    //   previousPrice: 400,
-    //   price: 499.25,
-    //   quantity: 1,
-    // },
-    {
-      title: "Wisdom of Crowds",
-      author: "Joe Abercrombie",
-      isOnSale: true,
-      previousPrice: 700,
-      price: 650.25,
-      quantity: 1,
-    },
-    {
-      title: "Lord of the Rings",
-      author: "J.R.R. Tolkien",
-      isOnSale: true,
-      previousPrice: 100400,
-      price: 699.5,
-      quantity: 1,
-    },
-  ];
+type CartItems = {
+  title: string;
+  author: string;
+  image: string;
+  price: number;
+  quantity: number;
+};
+
+type Props = {
+  cart: CartItems[];
+};
+
+const CartItems = (props: Props) => {
+  const { cart } = props;
   return (
     <table className="w-full table-auto">
       <thead>
@@ -43,7 +30,7 @@ const CartItems = () => {
         </tr>
       </thead>
       <tbody>
-        {array.map((item) => (
+        {cart.map((item) => (
           <tr className="h-24 border-y-2 border-gray-200" key={item.title}>
             <td className="pr-4">
               <div className="flex flex-row">
