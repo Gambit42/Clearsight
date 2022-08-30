@@ -29,6 +29,7 @@ const useGetProducts = (props: Props) => {
 
       setProducts(res.data.data);
       setCount(res.data.count);
+      console.log(res.data.data);
       setLoading(false);
     } catch (error) {
       console.log(error);

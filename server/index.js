@@ -5,6 +5,7 @@ const connectDatabase = require("./utils/connectDatabase");
 const dotenv = require("dotenv");
 const productURL = require("./routes/productRoute");
 const userURL = require("./routes/userRoute");
+const cartURL = require("./routes/cartRoute");
 
 //Use dotenv package wit the path
 dotenv.config({ path: "./.env" });
@@ -28,6 +29,7 @@ app.use(
 connectDatabase();
 app.use("/product", productURL);
 app.use("/account", userURL);
+app.use("/cart", cartURL);
 
 app.listen(PORT, () => {
   console.log(`Server is running: ${PORT}`);

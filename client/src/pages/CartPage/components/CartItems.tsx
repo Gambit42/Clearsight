@@ -10,7 +10,7 @@ type CartItems = {
 };
 
 type Props = {
-  cart: CartItems[];
+  cart: CartItems[] | undefined;
 };
 
 const CartItems = (props: Props) => {
@@ -30,7 +30,7 @@ const CartItems = (props: Props) => {
         </tr>
       </thead>
       <tbody>
-        {cart.map((item) => (
+        {cart?.map((item) => (
           <tr className="h-24 border-y-2 border-gray-200" key={item.title}>
             <td className="pr-4">
               <div className="flex flex-row">
