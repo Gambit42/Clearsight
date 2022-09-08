@@ -6,6 +6,7 @@ import ShoppingCart from "./components/ShoppingCart";
 import MobileNavigation from "./components/MobileNavigation";
 import SearchBarContext from "src/contexts/SearchBarContext";
 import MobileNavContext from "src/contexts/MobileNavContext";
+import CartContext from "src/contexts/CartContext";
 import { AuthContext } from "src/contexts/AuthContext";
 import { MenuItems } from "./utils/MenuItems";
 import axios from "axios";
@@ -18,7 +19,7 @@ const Navbar = () => {
   const { isMobileNavOpen, setIsMobileNavOpen } =
     useContext(MobileNavContext) || {};
   const { user, dispatch } = useContext(AuthContext) || {};
-  const cartCount = 4;
+  const { cartCount } = useContext(CartContext) || {};
 
   const handleMobileNav = () => {
     setIsOpen(!isOpen);
@@ -80,36 +81,35 @@ const Navbar = () => {
     </Link>
   ));
 
-  const displayUserOptions =
-    user?.length !== 0 ? (
+  const displayUserOptions = user ? (
+    <Link
+      to="/account/profile"
+      onClick={() => {
+        window.scrollTo(0, 0);
+      }}
+    >
+      <S.AccountIcon />
+    </Link>
+  ) : (
+    <>
       <Link
-        to="/account/profile"
+        to="/account/signin"
         onClick={() => {
           window.scrollTo(0, 0);
         }}
       >
-        <S.AccountIcon />
+        <S.StyledButton variant="primary">Sign In</S.StyledButton>
       </Link>
-    ) : (
-      <>
-        <Link
-          to="/account/signin"
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
-        >
-          <S.StyledButton variant="primary">Sign In</S.StyledButton>
-        </Link>
-        <Link
-          to="/account/signup"
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
-        >
-          <S.StyledButton variant="secondary">Register</S.StyledButton>
-        </Link>
-      </>
-    );
+      <Link
+        to="/account/signup"
+        onClick={() => {
+          window.scrollTo(0, 0);
+        }}
+      >
+        <S.StyledButton variant="secondary">Register</S.StyledButton>
+      </Link>
+    </>
+  );
 
   return (
     <S.Nav>

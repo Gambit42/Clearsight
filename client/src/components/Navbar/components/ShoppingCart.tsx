@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { IoCartOutline } from "react-icons/io5";
 
 type Props = {
-  cartCount: number | null;
+  cartCount: number | undefined;
 };
 
 type CartProps = {
@@ -23,7 +23,11 @@ const ShoppingCart = (props: Props) => {
       <CartContainer>
         <Cart />
         <CartCount
-          isEmpty={cartCount === 0 || cartCount === null ? true : false}
+          isEmpty={
+            cartCount === 0 || cartCount === null || cartCount === undefined
+              ? true
+              : false
+          }
         >
           <StyledSpan>{cartCount}</StyledSpan>
         </CartCount>

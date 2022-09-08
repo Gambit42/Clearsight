@@ -4,7 +4,7 @@ import styled from "styled-components";
 type CartItems = {
   title: string;
   author: string;
-  image: string;
+  image?: string | undefined;
   price: number;
   quantity: number;
 };
@@ -15,6 +15,7 @@ type Props = {
 
 const CartItems = (props: Props) => {
   const { cart } = props;
+
   return (
     <table className="w-full table-auto">
       <thead>
@@ -57,6 +58,7 @@ const CartItems = (props: Props) => {
                     className="text-sm text-center bg-gray-50 px-2 py-1 outline-none border shadow max-w-[40px]"
                     value={item.quantity}
                     type="number"
+                    onChange={() => {}}
                   />
                 </InputNumberContainer>
               </div>
@@ -67,6 +69,7 @@ const CartItems = (props: Props) => {
                   className="text-sm text-center bg-gray-50 p-2 outline-none border shadow max-w-[40px]"
                   value={item.quantity}
                   type="number"
+                  onChange={() => {}}
                 />
               </InputNumberContainer>
             </td>

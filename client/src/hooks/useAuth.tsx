@@ -1,10 +1,13 @@
 import React, { useEffect, useContext } from "react";
 import axios from "axios";
+import CartContext from "src/contexts/CartContext";
 import { AuthContext } from "src/contexts/AuthContext";
 
 const useAuth = () => {
   const { dispatch, token, isLoggedIn, isLoading } =
     useContext(AuthContext) || {};
+
+  const { setCartData, setCartCount } = useContext(CartContext) || {};
 
   const handleGetToken = async () => {
     const config = {
@@ -29,11 +32,33 @@ const useAuth = () => {
         headers: { Authorization: token as string },
         withCredentials: true,
       });
+      handleGetCart(res.data.user);
       dispatch({ type: "LOGIN", payload: res.data });
       localStorage.setItem("_user", JSON.stringify(res.data));
     } catch (error) {
       dispatch({ type: "STOP_LOADING" });
     }
+  };
+
+  const handleGetCart = async (user: any) => {
+    try {
+      const {
+        data: { data },
+      } = await axios.post("http://localhost:4000/cart/get", {
+        userId: user?._id,
+      });
+
+      setCartCount?.(handleGetCartCount(data.items));
+      setCartData?.(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleGetCartCount = (items: any) => {
+    return items.reduce((accumulator: number, currentValue: any) => {
+      return accumulator + currentValue.quantity;
+    }, 0);
   };
 
   useEffect(() => {

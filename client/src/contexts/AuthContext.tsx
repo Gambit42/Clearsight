@@ -1,7 +1,14 @@
 import { createContext } from "react";
 
+type User = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  _id: string;
+};
+
 type AuthContextProps = {
-  user: any[];
+  user: User;
   isLoggedIn: boolean;
   isLoading: boolean;
   token: string;

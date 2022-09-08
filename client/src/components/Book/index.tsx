@@ -1,15 +1,36 @@
 import React from "react";
 import * as S from "./styles";
+import useCartTransactions from "src/hooks/useCartTransactions";
+import ClipLoader from "react-spinners/ClipLoader";
 
 type Props = {
-  item: any;
+  item?: any;
 };
 const Book = (props: Props) => {
   const { item } = props;
+  const { handleCartTransactions, isLoading } = useCartTransactions({
+    productId: item._id,
+    quantity: 1,
+  });
 
-  const handleAddToCart = () => {
-    console.log("adding to cart");
-  };
+  const displayedButton = isLoading ? (
+    <S.AddToCartButton variant="loading" type="button">
+      <ClipLoader size={18} />
+      <h1 className="ml-2">Adding to Cart</h1>
+    </S.AddToCartButton>
+  ) : (
+    <S.AddToCartButton
+      variant="cart"
+      type="button"
+      onClick={() => {
+        handleCartTransactions();
+      }}
+    >
+      <S.CartIcon />
+      <h1>Add to cart</h1>
+    </S.AddToCartButton>
+  );
+
   return (
     <S.Container key={item.title}>
       <S.BookDetails>
@@ -28,12 +49,7 @@ const Book = (props: Props) => {
           {item.isOnSale ? <S.SaleText>SALE</S.SaleText> : ""}
         </S.InnerDetailsContainer>
       </S.BookDetails>
-      <S.AddToCartContainer>
-        <S.AddToCartButton variant="cart" onClick={handleAddToCart}>
-          <S.CartIcon />
-          <h1>Add to cart</h1>
-        </S.AddToCartButton>
-      </S.AddToCartContainer>
+      <S.AddToCartContainer>{displayedButton}</S.AddToCartContainer>
     </S.Container>
   );
 };

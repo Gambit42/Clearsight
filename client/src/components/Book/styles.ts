@@ -37,6 +37,7 @@ export const Title = styled.h1.attrs({
   text-overflow: ellipsis;
 `;
 
+
 export const PriceContainer = styled.div.attrs({
   className:
     "w-full flex flex-row items-center justify-start text-left overflow-hidden flex-wrap pt-2",
@@ -56,7 +57,7 @@ export const OldPrice = styled.div.attrs({
 })``;
 
 export const AddToCartContainer = styled.div.attrs({
-  className: "px-1 pb-4 max-w-[160px] w-full",
+  className: "px-1 pb-4 max-w-[180px] w-full",
 })``;
 
 export const CartIcon = styled(IoCartOutline).attrs({

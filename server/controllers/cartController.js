@@ -1,6 +1,5 @@
 const cartSchema = require("../models/cartModel");
 const productSchema = require("../models/productModel");
-const mongoose = require("mongoose");
 
 exports.handleAddToCart = async (req, res) => {
   const { userId, productId, quantity } = req.body;
@@ -20,13 +19,41 @@ exports.handleAddToCart = async (req, res) => {
     };
 
     if (cart) {
-      //check if product exist inside the cart
+      //get the index of the product
       const productIndex = cart.items.findIndex(
         (elem) => elem.productId == productId
       );
 
+      //check if product exist inside the cart
       if (productIndex !== -1) {
-        //if product exist inside the cart
+        //check product exist inside the cart and the quantity IS zero or less than
+        if (quantity <= 0) {
+          const newCart = await cartSchema.findOneAndUpdate(
+            {
+              userId,
+              items: { $elemMatch: { productId } },
+            },
+            {
+              $pull: {
+                items: {
+                  productId,
+                },
+              },
+              $set: {
+                totalCost: handleSum(cart.items),
+              },
+            },
+            { new: true }
+          );
+
+          return res.status(200).json({
+            success: true,
+            msg: "product and cart exist and quantity is zero or less than",
+            data: newCart,
+          });
+        }
+
+        //if product exist inside the cart and the quantity is NOT zero or less than
         const newCart = await cartSchema.findOneAndUpdate(
           {
             userId,
@@ -44,7 +71,7 @@ exports.handleAddToCart = async (req, res) => {
 
         return res.status(200).json({
           success: true,
-          msg: "product and cart exist",
+          msg: "Product and cart exist and quantity is not zero",
           data: newCart,
         });
       }
@@ -57,7 +84,7 @@ exports.handleAddToCart = async (req, res) => {
         },
         {
           $set: {
-            totalCost: handleSum(cart.items),
+            totalCost: handleSum(cart.items) + Number(product.price) * quantity,
           },
           $push: {
             items: {
@@ -75,7 +102,7 @@ exports.handleAddToCart = async (req, res) => {
       return res.status(200).json({
         success: true,
         msg: "Cart exist but no product",
-        // data: newCart,
+        data: newCart,
       });
     }
 
@@ -99,6 +126,23 @@ exports.handleAddToCart = async (req, res) => {
       data: newCart,
       cost: product.price,
       quantity: quantity,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+exports.getCart = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const cart = await cartSchema.findOne({ userId });
+    return res.status(200).json({
+      success: true,
+      data: cart,
     });
   } catch (error) {
     res.status(500).json({

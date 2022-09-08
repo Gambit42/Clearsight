@@ -2,6 +2,7 @@ import React, { useState, useReducer } from "react";
 import GlobalStyle from "src/styles/GlobalStyle";
 import SearchBarContext from "src/contexts/SearchBarContext";
 import MobileNavContext from "src/contexts/MobileNavContext";
+import CartContext from "src/contexts/CartContext";
 import { AuthContext, authReducer } from "src/contexts/AuthContext";
 
 type Props = {
@@ -19,27 +20,33 @@ const ContextProvider = (props: Props) => {
   const [state, dispatch] = useReducer(authReducer, initialValues);
   const [isSearchBarOpen, setIsSearchBarOpen] = useState<boolean>(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
+  const [cartCount, setCartCount] = useState<number>(0);
+  const [cartData, setCartData] = useState<any>({});
 
   return (
     <AuthContext.Provider
       value={{
-        user: state.user,
+        user: state.user.user,
         isLoggedIn: state.isLoggedIn,
         isLoading: state.isLoading,
         token: state.token,
         dispatch,
       }}
     >
-      <SearchBarContext.Provider
-        value={{ isSearchBarOpen, setIsSearchBarOpen }}
+      <CartContext.Provider
+        value={{ cartCount, setCartCount, cartData, setCartData }}
       >
-        <MobileNavContext.Provider
-          value={{ isMobileNavOpen, setIsMobileNavOpen }}
+        <SearchBarContext.Provider
+          value={{ isSearchBarOpen, setIsSearchBarOpen }}
         >
-          <GlobalStyle isMobileNavOpen={isMobileNavOpen} />
-          {children}
-        </MobileNavContext.Provider>
-      </SearchBarContext.Provider>
+          <MobileNavContext.Provider
+            value={{ isMobileNavOpen, setIsMobileNavOpen }}
+          >
+            <GlobalStyle isMobileNavOpen={isMobileNavOpen} />
+            {children}
+          </MobileNavContext.Provider>
+        </SearchBarContext.Provider>
+      </CartContext.Provider>
     </AuthContext.Provider>
   );
 };
